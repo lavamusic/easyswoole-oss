@@ -1,5 +1,5 @@
 {
-  "name": "easyswoole/oss",
+  "name": "lavamusic/easyswoole-oss",
   "description": "Coroutine version of Memcache client",
   "type": "library",
   "license": "Apache-2.0",
