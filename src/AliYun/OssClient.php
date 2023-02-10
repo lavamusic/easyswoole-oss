@@ -2940,10 +2940,15 @@ class OssClient
     {
         $tmpObject = $options[OssConst::OSS_OBJECT];
         try {
+            $ignore = '';
+            if (PHP_VERSION_ID <= 70100) {
+                //高版本的 PHP 不支持 //IGNORE
+                $ignore = "//IGNORE";
+            }
             if (OssUtil::isGb2312($options[OssConst::OSS_OBJECT])) {
-                $options[OssConst::OSS_OBJECT] = iconv('GB2312', "UTF-8//IGNORE", $options[OssConst::OSS_OBJECT]);
+                $options[OssConst::OSS_OBJECT] = iconv('GB2312', "UTF-8{$ignore}", $options[OssConst::OSS_OBJECT]);
             } elseif (OssUtil::checkChar($options[OssConst::OSS_OBJECT], true)) {
-                $options[OssConst::OSS_OBJECT] = iconv('GBK', "UTF-8//IGNORE", $options[OssConst::OSS_OBJECT]);
+                $options[OssConst::OSS_OBJECT] = iconv('GBK', "UTF-8{$ignore}", $options[OssConst::OSS_OBJECT]);
             }
         } catch (\Exception $e) {
             try {
